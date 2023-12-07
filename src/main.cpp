@@ -30,26 +30,12 @@ byte colPins[COLS] = {7, 8, 9, 10, 14, 15, 16}; //connect to the column pinouts 
 //initialize an instance of class NewKeypad
 Keypad yokeButtons = Keypad(makeKeymap(buttons), rowPins, colPins, ROWS, COLS); 
 
-void setup(){
-  Serial.begin(9600); //Start serial monitoring
-  Joystick.begin(); //Starts joystick
-}
-  
-void loop(){
-  checkButtons();
-  
-  xAxis_ = analogRead(A0);
-  xAxis_ = map(xAxis_,0,1023,0,255);
-  Joystick.setXAxis(xAxis_);
-  
-  yAxis_ = analogRead(A1);
-  yAxis_ = map(yAxis_,0,1023,0,255);
-  Joystick.setYAxis(yAxis_);
-
-  delay(10);
+void tst() {
+  Serial.println("test");
 }
 
-void checkButtons(void) {
+
+void checkJoystickButtons(void) {
   if (yokeButtons.getKeys())
   {
     for (int i=0; i<LIST_MAX; i++)   
@@ -70,3 +56,26 @@ void checkButtons(void) {
         }
   }
 }
+
+
+void setup(){
+  Serial.begin(9600); //Start serial monitoring
+  Joystick.begin(); //Starts joystick
+}
+  
+void loop(){
+
+  checkJoystickButtons();
+  
+  xAxis_ = analogRead(A0);
+  xAxis_ = map(xAxis_,0,1023,0,255);
+  Joystick.setXAxis(xAxis_);
+  
+  yAxis_ = analogRead(A1);
+  yAxis_ = map(yAxis_,0,1023,0,255);
+  Joystick.setYAxis(yAxis_);
+
+  delay(10);
+}
+
+
